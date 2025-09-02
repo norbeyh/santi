@@ -13,13 +13,16 @@ df = df.dropna(subset=["edad", "tiempo sesion"])
 # Eliminar duplicados
 df = df.drop_duplicates(subset=["nombre","edad","pais","tiempo sesion","estado"])
 
+# 🔹 Filtrar solo usuarios activos
+df = df[df["estado"] == "activo"]
+
 # Generar colores (tantos como puntos válidos)
 colores = sns.color_palette("pastel", len(df))
 
 # Graficar
 plt.figure(figsize=(8,6))
 plt.scatter(df["edad"], df["tiempo sesion"], c=colores, s=100)
-plt.title("Tiempo de sesión por edad")
+plt.title("Tiempo de sesión por edad (solo usuarios activos)")
 plt.xlabel("Edad")
 plt.ylabel("Tiempo de sesión")
 plt.show()
